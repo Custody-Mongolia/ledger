@@ -107,7 +107,7 @@ release:
 
 
 dockers:
-  - image_templates: ["ghcr.io/formancehq/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-amd64"]
+  - image_templates: ["ghcr.io/warmestman/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-amd64"]
     goarch: amd64
     dockerfile: build.Dockerfile
     use: buildx
@@ -121,7 +121,7 @@ dockers:
       - --label=org.opencontainers.image.created={{ time "2006-01-02T15:04:05Z07:00" }}
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses=MIT
-  - image_templates: [ "ghcr.io/formancehq/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-arm64" ]
+  - image_templates: [ "ghcr.io/warmestman/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-arm64" ]
     goarch: arm64
     dockerfile: build.Dockerfile
     use: buildx
@@ -137,11 +137,11 @@ dockers:
       - --label=org.opencontainers.image.licenses=MIT
 
 docker_manifests:
-  - name_template: 'ghcr.io/formancehq/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}'
+  - name_template: 'ghcr.io/warmestman/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}'
     image_templates:
-      - 'ghcr.io/formancehq/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-amd64'
-      - 'ghcr.io/formancehq/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-arm64'
-  - name_template: '{{ if not .IsNightly }}ghcr.io/formancehq/{{ .ProjectName }}:latest{{ end }}'
+      - 'ghcr.io/warmestman/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-amd64'
+      - 'ghcr.io/warmestman/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-arm64'
+  - name_template: '{{ if not .IsNightly }}ghcr.io/warmestman/{{ .ProjectName }}:latest{{ end }}'
     image_templates:
-      - 'ghcr.io/formancehq/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-amd64'
-      - 'ghcr.io/formancehq/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-arm64'
+      - 'ghcr.io/warmestman/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-amd64'
+      - 'ghcr.io/warmestman/{{ .ProjectName }}:{{ if not .IsNightly }}v{{ end }}{{ .Version }}-arm64'
