@@ -11,9 +11,9 @@ jobs:
     name: 'Build Control'
     runs-on: ubuntu-latest
     steps:
-      - run: curl -OL https://github.com/numary/control/releases/download/1.2.0/numary-control-1.2.0.tar.gz
-      - run: tar -zxvf numary-control-1.2.0.tar.gz
-      - run: rm -rf numary-control-1.2.0.tar.gz
+      - run: curl -OL https://github.com/formancehq/control/archive/refs/tags/v1.9.0-beta.1.tar.gz
+      - run: tar -zxvf v1.9.0-beta.1.tar.gz
+      - run: rm -rf v1.9.0-beta.1.tar.gz
       - uses: actions/upload-artifact@v2
         with:
           name: control-dist
