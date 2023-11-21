@@ -18,9 +18,9 @@ on:
       GITHUB_TOKEN:
         required: true
         description: GitHub token with access to the repo
-      SEGMENT_WRITE_KEY_OSS:
-        required: false
-        description: Segment write key for the OSS repo
+      # SEGMENT_WRITE_KEY_OSS:
+      #   required: false
+      #   description: Segment write key for the OSS repo
 
 jobs:
   Docker:
@@ -50,11 +50,11 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/custody-mongolia/ledger:latest,ghcr.io/custody-mongolia//ledger:${{ inputs.VERSION }}
+          tags: ghcr.io/custody-mongolia/ledger:latest,ghcr.io/custody-mongolia/ledger:${{ inputs.VERSION }}
           build-args: |
             APP_SHA=${{ inputs.APP_SHA }}
             VERSION=${{ inputs.VERSION }}
-            SEGMENT_WRITE_KEY=${{ secrets.SEGMENT_WRITE_KEY_OSS }}
+            # SEGMENT_WRITE_KEY=${{ secrets.SEGMENT_WRITE_KEY_OSS }}
       - name: Build and push PreReleased
         if: inputs.RELEASE == 'prereleased'
         uses: docker/build-push-action@v2
@@ -62,11 +62,11 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/custody-mongolia//ledger:${{ inputs.VERSION }}
+          tags: ghcr.io/custody-mongolia/ledger:${{ inputs.VERSION }}
           build-args: |
             APP_SHA=${{ inputs.APP_SHA }}
             VERSION=${{ inputs.VERSION }}
-            SEGMENT_WRITE_KEY=${{ secrets.SEGMENT_WRITE_KEY_OSS }}
+            # SEGMENT_WRITE_KEY=${{ secrets.SEGMENT_WRITE_KEY_OSS }}
       - name: Build and push
         if: inputs.RELEASE != 'released' || inputs.RELEASE != 'prereleased'
         uses: docker/build-push-action@v2
@@ -74,8 +74,8 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/custody-mongolia//ledger:${{ inputs.APP_SHA }}
+          tags: ghcr.io/custody-mongolia/ledger:${{ inputs.APP_SHA }}
           build-args: |
             APP_SHA=${{ inputs.APP_SHA }}
             VERSION=${{ inputs.VERSION }}
-            SEGMENT_WRITE_KEY=${{ secrets.SEGMENT_WRITE_KEY_OSS }}
+            # SEGMENT_WRITE_KEY=${{ secrets.SEGMENT_WRITE_KEY_OSS }}
