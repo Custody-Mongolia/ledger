@@ -1,4 +1,4 @@
-project_name: numary
+project_name: ledger
 env:
   - GO111MODULE=on
   - GOPROXY=https://proxy.golang.org
@@ -7,8 +7,8 @@ before:
     - go mod download
 
 builds:
-  - binary: numary
-    id: numary_windows
+  - binary: ledger
+    id: ledger_windows
     ldflags:
       - -X github.com/numary/ledger/cmd.BuildDate={{ .Date }}
       - -X github.com/numary/ledger/cmd.Version={{ .Version }}
@@ -23,8 +23,8 @@ builds:
       - amd64
     flags:
       - -tags=json1
-  - binary: numary
-    id: numary_linux_amd64
+  - binary: ledger
+    id: ledger_linux_amd64
     ldflags:
       - -X github.com/numary/ledger/cmd.BuildDate={{ .Date }}
       - -X github.com/numary/ledger/cmd.Version={{ .Version }}
@@ -39,8 +39,8 @@ builds:
       - amd64
     flags:
       - -tags=json1,netgo
-  - binary: numary
-    id: numary_linux_arm64
+  - binary: ledger
+    id: ledger_linux_arm64
     ldflags:
       - -X github.com/numary/ledger/cmd.BuildDate={{ .Date }}
       - -X github.com/numary/ledger/cmd.Version={{ .Version }}
@@ -58,11 +58,11 @@ builds:
       - -tags=json1,netgo
 
 archives:
-  - id: "numary"
+  - id: "ledger"
     builds:
-      - numary_linux_amd64
-      - numary_linux_arm64
-      - numary_windows
+      - ledger_linux_amd64
+      - ledger_linux_arm64
+      - ledger_windows
     format: tar.gz
     format_overrides:
       - goos: windows
@@ -113,22 +113,22 @@ release:
     - Read the [documentation](https://docs.numary.com/oss/ledger/get-started/installation)
     - Join our [Discord server](https://discord.gg/xyHvcbzk4w)
 
-nfpms:
-  - id: packages
-    package_name: numary
-    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    builds:
-      - numary_linux_amd64
-      - numary_linux_arm64
-    homepage: https://formance.com
-    maintainer: Maxence Maireaux <maxence@formance.com>
-    formats:
-      - deb
-      - rpm
+# nfpms:
+#   - id: packages
+#     package_name: numary
+#     file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+#     builds:
+#       - numary_linux_amd64
+#       - numary_linux_arm64
+#     homepage: https://formance.com
+#     maintainer: Maxence Maireaux <maxence@formance.com>
+#     formats:
+#       - deb
+#       - rpm
 
 publishers:
   - name: fury.io
     ids:
       - packages
     dir: "{{ dir .ArtifactPath }}"
-    cmd: curl -F package=@{{ .ArtifactName }} https://{{ .Env.FURY_TOKEN }}@push.fury.io/numary/
+    cmd: curl -F package=@{{ .ArtifactName }} https://{{ .Env.FURY_TOKEN }}@push.fury.io/ledger/
