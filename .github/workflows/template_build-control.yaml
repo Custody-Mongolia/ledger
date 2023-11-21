@@ -2,7 +2,7 @@ name: Build for Control
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      NUMARY_GITHUB_TOKEN:
         required: true
         description: GitHub token with access to the repo
 

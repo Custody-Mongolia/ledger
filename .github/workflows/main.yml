@@ -41,7 +41,7 @@ jobs:
     name: 'Control'
     uses: ./.github/workflows/template_build-control.yaml
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NUMARY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   GoReleaserBuild:
     needs:
@@ -52,7 +52,7 @@ jobs:
     name: 'GoReleaser Build'
     uses: ./.github/workflows/template_goreleaser-build.yaml
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NUMARY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # SEGMENT_WRITE_KEY_OSS: ${{ secrets.SEGMENT_WRITE_KEY_OSS }}
 
   GoReleaserRelease:
@@ -64,7 +64,7 @@ jobs:
     name: 'GoReleaser Release'
     uses: ./.github/workflows/template_goreleaser-release.yaml
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NUMARY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # SEGMENT_WRITE_KEY_OSS: ${{ secrets.SEGMENT_WRITE_KEY_OSS }}
       FURY_TOKEN: ${{ secrets.FURY_TOKEN }}
 
@@ -96,7 +96,7 @@ jobs:
       APP_SHA: ${{ github.sha }}
       RELEASE: ${{ github.event.action }}
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NUMARY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # SEGMENT_WRITE_KEY_OSS: ${{ secrets.SEGMENT_WRITE_KEY_OSS }}
 
   DockerBranch:
@@ -111,5 +111,5 @@ jobs:
       APP_SHA: ${{ github.sha }}
       RELEASE: ${{ github.event.action }}
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NUMARY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # SEGMENT_WRITE_KEY_OSS: ${{ secrets.SEGMENT_WRITE_KEY_OSS }}

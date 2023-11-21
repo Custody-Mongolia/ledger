@@ -2,7 +2,7 @@ name: GoReleaser Release
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      NUMARY_GITHUB_TOKEN:
         required: true
         description: GitHub token with access to the repo
       # SEGMENT_WRITE_KEY_OSS:
@@ -39,7 +39,7 @@ jobs:
       - name: Run GoReleaser for Linux
         if: ${{ matrix.os == 'ubuntu-latest' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMARY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FURY_TOKEN: ${{ secrets.FURY_TOKEN }}
           # SEGMENT_WRITE_KEY: ${{ secrets.SEGMENT_WRITE_KEY_OSS }}
         uses: goreleaser/goreleaser-action@v4
@@ -49,7 +49,7 @@ jobs:
       - name: Run GoReleaser for MacOS
         if: ${{ matrix.os == 'macos-latest' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMARY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FURY_TOKEN: ${{ secrets.FURY_TOKEN }}
           # SEGMENT_WRITE_KEY: ${{ secrets.SEGMENT_WRITE_KEY_OSS }}
         uses: goreleaser/goreleaser-action@v4

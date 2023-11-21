@@ -15,7 +15,7 @@ on:
         required: true
         description: Whether to release the Docker image.
     secrets:
-      GITHUB_TOKEN:
+      NUMARY_GITHUB_TOKEN:
         required: true
         description: GitHub token with access to the repo
       # SEGMENT_WRITE_KEY_OSS:
