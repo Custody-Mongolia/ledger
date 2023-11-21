@@ -15,11 +15,11 @@ on:
         required: true
         description: Whether to release the Docker image.
     secrets:
-      NUMARY_GITHUB_TOKEN:
+      GITHUB_TOKEN:
         required: true
         description: GitHub token with access to the repo
       SEGMENT_WRITE_KEY_OSS:
-        required: true
+        required: false
         description: Segment write key for the OSS repo
 
 jobs:
@@ -41,8 +41,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: "NumaryBot"
-          password: ${{ secrets.NUMARY_GITHUB_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Released
         if: inputs.RELEASE == 'released'
         uses: docker/build-push-action@v2
@@ -50,7 +50,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/formancehq/ledger:latest,ghcr.io/formancehq/ledger:${{ inputs.VERSION }}
+          tags: ghcr.io/custody-mongolia/ledger:latest,ghcr.io/custody-mongolia//ledger:${{ inputs.VERSION }}
           build-args: |
             APP_SHA=${{ inputs.APP_SHA }}
             VERSION=${{ inputs.VERSION }}
@@ -62,7 +62,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/formancehq/ledger:${{ inputs.VERSION }}
+          tags: ghcr.io/custody-mongolia//ledger:${{ inputs.VERSION }}
           build-args: |
             APP_SHA=${{ inputs.APP_SHA }}
             VERSION=${{ inputs.VERSION }}
@@ -74,7 +74,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/formancehq/ledger:${{ inputs.APP_SHA }}
+          tags: ghcr.io/custody-mongolia//ledger:${{ inputs.APP_SHA }}
           build-args: |
             APP_SHA=${{ inputs.APP_SHA }}
             VERSION=${{ inputs.VERSION }}

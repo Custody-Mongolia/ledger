@@ -2,7 +2,7 @@ name: GoReleaser Build
 on:
   workflow_call:
     secrets:
-      NUMARY_GITHUB_TOKEN:
+      GITHUB_TOKEN:
         required: true
         description: GitHub token with access to the repo
       SEGMENT_WRITE_KEY_OSS:
@@ -36,7 +36,7 @@ jobs:
           version: latest
           args: build --parallelism 4 --rm-dist --skip-validate --snapshot
         env:
-          GITHUB_TOKEN: ${{ secrets.NUMARY_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEGMENT_WRITE_KEY: ${{ secrets.SEGMENT_WRITE_KEY_OSS }}
       - name: Run GoReleaser for MacOS
         if: ${{ matrix.os == 'macos-latest' }}
@@ -45,7 +45,7 @@ jobs:
           version: latest
           args: build -f .goreleaser-darwin.yml --parallelism 4 --rm-dist --skip-validate --snapshot
         env:
-          GITHUB_TOKEN: ${{ secrets.NUMARY_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEGMENT_WRITE_KEY: ${{ secrets.SEGMENT_WRITE_KEY_OSS }}
       - uses: actions/upload-artifact@v2
         with:

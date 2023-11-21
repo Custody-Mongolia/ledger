@@ -2,7 +2,7 @@ name: SDK Generate
 on:
   workflow_call:
     secrets:
-      NUMARY_GITHUB_TOKEN:
+      GITHUB_TOKEN:
         required: true
         description: GitHub token with access to the repo
 
@@ -16,11 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.NUMARY_GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ inputs.VERSION }}
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.NUMARY_GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository: formancehq/numary-sdk-${{ matrix.sdk }}
           path: sdks/${{ matrix.sdk }}
       - name: Set up QEMU
