@@ -53,18 +53,18 @@ publishers:
     dir: "{{ dir .ArtifactPath }}"
     cmd: curl -F package=@{{ .ArtifactName }} https://{{ .Env.FURY_TOKEN }}@push.fury.io/ledger/
 
-brews:
-  - repository:
-      owner: formancehq
-      name: homebrew-tap
-    name: ledger
-    folder: Formula
-    homepage: https://formance.com
-    skip_upload: auto
-    test: |
-      system "#{bin}/ledger version"
-    install: |
-      bin.install "ledger"
+# brews:
+#   - repository:
+#       owner: formancehq
+#       name: homebrew-tap
+#     name: ledger
+#     folder: Formula
+#     homepage: https://formance.com
+#     skip_upload: auto
+#     test: |
+#       system "#{bin}/ledger version"
+#     install: |
+#       bin.install "ledger"
 
 nightly:
   name_template: '{{ .FullCommit }}'
